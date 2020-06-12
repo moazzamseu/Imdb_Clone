@@ -11,8 +11,14 @@
     - downloads link
     - watch links
     - cast
-    - trailer_link
-
     - related movies
+    - search
 
-- search
+- trailer_link
+- no movie in year
+    - slug
+    - movie trailer
+    - slider
+- related movies
+- tags
+- home

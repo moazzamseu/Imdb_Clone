@@ -2,11 +2,12 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.views.generic import ListView, DetailView
+from django.views.generic.dates import YearArchiveView
 from .models import Movie, Movielinks
 
 class MovieList(ListView):
     model = Movie
-    paginate_by = 1
+    paginate_by = 2
 
 class MovieDetail(DetailView):
     model = Movie
@@ -24,7 +25,7 @@ class MovieDetail(DetailView):
 
 class MovieCategory(ListView):
     model = Movie
-    paginate_by = 1
+    paginate_by = 2
 
     def get_queryset(self):
         self.category = self.kwargs['category']
@@ -38,7 +39,7 @@ class MovieCategory(ListView):
 
 class MovieLanguage(ListView):
     model = Movie
-    paginate_by = 1
+    paginate_by = 2
 
     def get_queryset(self):
         self.language = self.kwargs['lang']
@@ -51,7 +52,7 @@ class MovieLanguage(ListView):
 
 class MovieSearch(ListView):
     model = Movie
-    paginate_by = 1
+    paginate_by = 2
 
     def get_queryset(self):
         query = self.request.GET.get('query')
@@ -60,3 +61,10 @@ class MovieSearch(ListView):
         else:
             object_list = self.model.objects.none()
         return object_list
+
+class MoviceYear(YearArchiveView):
+    queryset = Movie.objects.all()
+    date_field = 'year_of_production'
+    make_object_list = True
+    allow_future = True
+    print(queryset)

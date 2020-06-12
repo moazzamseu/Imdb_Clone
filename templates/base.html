@@ -13,17 +13,11 @@
 	<script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
 	<script src="{% static 'js/script.js' %}"></script>
 
-
 	<!-- Demo styles -->
-	<style>
-
-
-
-	</style>
+	<style></style>
 </head>
 <body>
 	<div class="wrapper">
-
 		<header class="header">
 			<figure class="logo"><a href="/"><img src="{% static 'img/logo.png' %}" alt="Logo"></figure></a>
 			<nav class="menu">
@@ -39,10 +33,13 @@
 					</li>
 					<li><a>Year</a>
 						<ul>
-							<li><a href="year.html">2017</a></li>
-							<li><a href="year.html">2016</a></li>
-							<li><a href="year.html">2015</a></li>
-							<li><a href="year.html">2014</a></li>
+							<li><a href="{% url 'movies:movie_year' '2014' %}">2014</a></li>
+							<li><a href="{% url 'movies:movie_year' '2015' %}">2015</a></li>
+							<li><a href="{% url 'movies:movie_year' '2016' %}">2016</a></li>
+							<li><a href="{% url 'movies:movie_year' '2017' %}">2017</a></li>
+							<li><a href="{% url 'movies:movie_year' '2018' %}">2018</a></li>
+							<li><a href="{% url 'movies:movie_year' '2019' %}">2019</a></li>
+							<li><a href="{% url 'movies:movie_year' '2020' %}">2020</a></li>
 						</ul>
 					</li>
 					<li><a>Language</a>
@@ -71,33 +68,15 @@
 			<div class="swiper-container">
 
 				<div class="swiper-wrapper">
-					<div class="swiper-slide">
-						<img src="{% static 'images/slider/poster2.jpg' %}">
+                        <div class="swiper-slide">
+                            {% if slider_movie.banner %}
+                                <img src="{{ slider_movie.banner.url }}">
+                            {% endif %} 
 						<div class="caption">
 							<div class="captioninside">
-								<h3>Movie Title</h3>
-								<p>Lorem ipsum dolor siamet</p>
-								<a href="single.html" class="playbutton">Play</a>
-							</div>
-						</div>
-					</div>
-					<div class="swiper-slide">
-						<img src="{% static 'images/slider/poster1.jpg' %}">
-						<div class="caption">
-							<div class="captioninside">
-								<h3>Movie Title 2</h3>
-								<p>Lorem ipsum dolor siamet</p>
-								<a href="single.html" class="playbutton">Play</a>
-							</div>
-						</div>
-					</div>
-					<div class="swiper-slide">
-						<img src="{% static 'images/slider/poster2.jpg' %}">
-						<div class="caption">
-							<div class="captioninside">
-								<h3>Movie Title 3</h3>
-								<p>Lorem ipsum dolor siamet</p>
-								<a href="single.html" class="playbutton">Play</a>
+								<h3>{{ slider_movie.title }}</h3>
+								<p>{{ slider_movie.description }}</p>
+								<a href="{% url 'movies:movie_detail' slider_movie.slug %}" class="playbutton">Play</a>
 							</div>
 						</div>
 					</div>
