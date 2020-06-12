@@ -10,7 +10,8 @@
     - status [recently added - most watched - top rated]
     - downloads link
     - watch links
-
+    - cast
+    - trailer_link
 
     - related movies
 

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block body %}
 		<main class="content">
 			<section class="centered">
@@ -13,19 +14,31 @@
 					{% endfor %}
 
 				</div>
-				<nav class="pagination">
-					<ul>
-						<li><a href="#">Prev</a></li>
-						<li><a href="#">1</a></li>
-						<li><a href="#" class="menuactive">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">...</a></li>
-						<li><a href="#">20</a></li>
-						<li><a href="#">21</a></li>
-						<li><a href="#">Next</a></li>
-					</ul>
-				</nav>
-			</section>
+				{% if is_paginated %}
+					<nav class="pagination">
+						<ul>
+							{% if page_obj.has_previous %}
+								<li><a href="?page={{ page_obj.previous_page_number }}">Prev</a></li>
+								{% else %}
+								<li class="disabled"></li>
+							{% endif %}
+							
+							{% for pages in page_obj.paginator.page_range %}
+								{% if page_obj.paginator.page_range %}
+									<li><a href="?page={{pages}}">{{pages}}</a></li>
+									{% else %}
+									<li><a href="?page={{pages}}">pages</a></li>
+								{% endif %}
+							{% endfor %}
 
+							{% if page_obj.has_next %}
+								<li><a href="?page={{ page_obj.next_page_number }}">Next</a></li>
+								{% else %}
+								<li class="disabled"></li>
+							{% endif %}
+						</ul>
+					</nav>
+				{% endif %}
+			</section>
 		</main>
 {% endblock body %}
